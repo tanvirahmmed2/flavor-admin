@@ -7,7 +7,7 @@ import Footer from './layout/Footer'
 
 const App = () => {
   return (
-    <div>
+    <div className='w-full relative overflow-x-hidden p-2'>
       <Navbar/>
       <Sidebar/>
       <Routes>
