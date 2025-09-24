@@ -4,6 +4,7 @@ import Navbar from './layout/Navbar'
 import Sidebar from './layout/Sidebar'
 import Home from './layout/Home'
 import Footer from './layout/Footer'
+import Order from './pages/Order'
 
 const App = () => {
   return (
@@ -12,6 +13,7 @@ const App = () => {
       <Sidebar/>
       <Routes>
         <Route path='/' element={<Home/>}/>
+        <Route path='/orders' element={<Order/>}/>
       </Routes>
       <Footer/>
     </div>
