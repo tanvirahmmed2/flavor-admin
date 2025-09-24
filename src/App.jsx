@@ -5,6 +5,12 @@ import Sidebar from './layout/Sidebar'
 import Home from './layout/Home'
 import Footer from './layout/Footer'
 import Order from './pages/Order'
+import Setting from './pages/Setting'
+import AddProduct from './pages/AddProduct'
+import UpdateProduct from './pages/UpdateProduct'
+import SignIn from './user/SignIn'
+import SignUp from './user/SignUp'
+import Products from './pages/Products'
 
 const App = () => {
   return (
@@ -15,6 +21,12 @@ const App = () => {
         <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='/orders' element={<Order/>}/>
+        <Route path='/settings' element={<Setting/>}/>
+        <Route path='/addproduct' element={<AddProduct/>}/>
+        <Route path='/updateproduct' element={<UpdateProduct/>}/>
+        <Route path='/products' element={<Products/>}/>
+        <Route path='/signin' element={<SignIn/>}/>
+        <Route path='/signup' element={<SignUp/>}/>
       </Routes>
       </div>
       <Footer/>
