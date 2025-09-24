@@ -2,14 +2,16 @@ import React from 'react';
 import { BrowserRouter } from 'react-router-dom'
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
 import { ContextProvider } from './components/Context';
+import App from './App';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <ContextProvider>
-        <BrowserRouter>
+    <BrowserRouter>
+        <ContextProvider>
+
             <App />
-        </BrowserRouter>
-    </ContextProvider>
+
+        </ContextProvider>
+    </BrowserRouter>
 );

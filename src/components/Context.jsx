@@ -15,6 +15,6 @@ export const ContextProvider = ({ children }) => {
         setIsSidebar,
     }
     return <ShopContext.Provider value={ContextValue}>
-
+        {children}
     </ShopContext.Provider>
 }
