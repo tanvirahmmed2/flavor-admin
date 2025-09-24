@@ -4,10 +4,10 @@ const AddProduct = () => {
   return (
     <section className='w-full h-auto flex flex-col gap-6 items-center justify-center p-4'>
       <h1 className='text-2xl font-semibold'>Add Latest Item</h1>
-      <div className='w-full md:w-3/4 flex flex-col items-center justify-center gap-3'>
+      <form className='w-full md:w-3/4 flex flex-col items-center justify-center gap-3'>
         <div className=' flex flex-col items-start justify-start gap-2 w-full md:w-3/5'>
           <label htmlFor="name">Name</label>
-          <input type="text" name='name' id='name' placeholder='enter product name' className='w-full outline-none border-2 px-3 p-1 rounded-md' />
+          <input required type="text" name='name' id='name' placeholder='enter product name' className='w-full outline-none border-2 px-3 p-1 rounded-md' />
         </div>
         <div className=' flex flex-col items-start justify-start gap-2 w-full md:w-3/5'>
           <label htmlFor="description">Description</label>
@@ -25,14 +25,18 @@ const AddProduct = () => {
         </div>
         <div className=' flex flex-col items-start justify-start gap-2 w-full md:w-3/5'>
           <label htmlFor="old_price">Price</label>
-          <input type="number" name='old_price' id='old_price' placeholder='enter product price' className='w-full outline-none border-2 px-3 p-1 rounded-md' />
+          <input required type="number" name='old_price' id='old_price' placeholder='enter product price' className='w-full outline-none border-2 px-3 p-1 rounded-md' />
         </div>
         <div className=' flex flex-col items-start justify-start gap-2 w-full md:w-3/5'>
           <label htmlFor="new_price">Offer Price</label>
-          <input type="number" name='new_price' id='new_price' placeholder='enter product offer price' className='w-full outline-none border-2 px-3 p-1 rounded-md' />
+          <input required type="number" name='new_price' id='new_price' placeholder='enter product offer price' className='w-full outline-none border-2 px-3 p-1 rounded-md' />
         </div>
-        <button className='px-4 p-1 bg-orange-500 text-white rounded-md'>Submit</button>
-      </div>
+        <div className=' flex flex-col items-start justify-start gap-2 w-full md:w-3/5'>
+          <label htmlFor="image">Image</label>
+          <input required type='file' alt='image' name='image' id='image' placeholder='enter product offer price' className='w-full outline-none border-2 px-3 p-1 rounded-md' />
+        </div>
+        <button type='submit' className='px-4 p-1 bg-orange-500 text-white rounded-md'>Submit</button>
+      </form>
 
     </section>
   )

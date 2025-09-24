@@ -18,7 +18,7 @@ const Sidebar = () => {
           <Link to='/addproduct'>Add Product</Link>
           <Link to='/updateproduct'>Update Product</Link>
           <Link to='/orders'>Order</Link>
-          <Link to='/signin'>SignIn</Link>
+          <Link to='/signin'>Sign In</Link>
           <Link to='/signup'>Sign Up</Link>
           <Link to='/reviews'></Link>
         </div>

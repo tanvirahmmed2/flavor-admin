@@ -12,19 +12,19 @@ const SignIn = () => {
 
 
         </div>
-        <div className='w-full p-4 rounded-lg flex flex-col items-center justify-center gap-3 bg-gray-50'>
+        <form className='w-full p-4 rounded-lg flex flex-col items-center justify-center gap-3 bg-gray-50'>
           <div className=' flex flex-col items-start justify-start gap-2 w-full md:w-3/5'>
             <label htmlFor="username">username</label>
-            <input type="text" name='username' id='username' className='w-full outline-none border-2 px-3 p-1 rounded-md' />
+            <input required type="text" name='username' id='username' className='w-full outline-none border-2 px-3 p-1 rounded-md' />
           </div>
           <div className=' flex flex-col items-start justify-start gap-2 w-full md:w-3/5'>
             <label htmlFor="password">password</label>
-            <input type="text" name='password' id='password' className='w-full outline-none border-2 px-3 p-1 rounded-md' />
+            <input required type="text" name='password' id='password' className='w-full outline-none border-2 px-3 p-1 rounded-md' />
           </div>
           <Link className='text-xs italics text-blue-600 my-4 ' to='/recover'>Forgot password?</Link>
-          <button className='px-4 p-1 bg-orange-500 text-white rounded-md'>Sign In</button>
+          <button type='submit' className='px-4 p-1 bg-orange-500 text-white rounded-md'>Sign In</button>
 
-        </div>
+        </form>
 
       </section>
     </div>
