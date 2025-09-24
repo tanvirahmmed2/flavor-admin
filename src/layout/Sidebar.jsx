@@ -22,7 +22,7 @@ const Sidebar = () => {
         <Link to='/reviews'></Link>
       </div>
       <div>
-        <Link  onClick={handleSidebar}><FaGear className='text-xl cursor-pointer hover:rotate-45 transition duration-500'/></Link>
+        <Link  onClick={handleSidebar} to='/settings'><FaGear className='text-xl cursor-pointer hover:rotate-45 transition duration-500'/></Link>
       </div>
     </div>
   )
