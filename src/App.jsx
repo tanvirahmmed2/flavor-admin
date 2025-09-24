@@ -11,10 +11,12 @@ const App = () => {
     <div className='w-full relative overflow-x-hidden'>
       <Navbar/>
       <Sidebar/>
-      <Routes>
+      <div className='w-full m-24 flex flex-col items-center justify-center gap-6'>
+        <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='/orders' element={<Order/>}/>
       </Routes>
+      </div>
       <Footer/>
     </div>
   )
