@@ -1,7 +1,41 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 const SignIn = () => {
+  const [problem, setProblem]= useState([])
+  const [user, setUser] = useState({
+    email: '',
+    password: ''
+  })
+
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setUser((prev) => ({ ...prev, [name]: value }))
+  }
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    try {
+      const res = await fetch('http://localhost:5000/user/signin', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(user)
+      })
+      const data = await res.json()
+
+      if (data.success) {
+        setProblem('sign in successful')
+        setUser({ email: '', password: '' })
+      } else {
+        setProblem(data.message || 'Login failed')
+      }
+    } catch (error) {
+      setProblem(error)
+    }
+  }
+
   return (
     <div className='w-full flex items-center justify-center'>
       <section className='w-full lg:w-1/2 h-auto flex flex-col md:flex-row items-center justify-center gap-4'>
@@ -12,18 +46,20 @@ const SignIn = () => {
 
 
         </div>
-        <form className='w-full p-4 rounded-lg flex flex-col items-center justify-center gap-3 bg-gray-50'>
+
+
+        <form onSubmit={handleSubmit} className='w-full p-4 rounded-lg flex flex-col items-center justify-center gap-3 bg-gray-50'>
           <div className=' flex flex-col items-start justify-start gap-2 w-full md:w-3/5'>
-            <label htmlFor="username">username</label>
-            <input required type="text" name='username' id='username' className='w-full outline-none border-2 px-3 p-1 rounded-md' />
+            <label htmlFor="email">email</label>
+            <input required type="email" name='email' id='email' className='w-full outline-none border-2 px-3 p-1 rounded-md' onChange={handleChange} value={user.email} />
           </div>
           <div className=' flex flex-col items-start justify-start gap-2 w-full md:w-3/5'>
             <label htmlFor="password">password</label>
-            <input required type="text" name='password' id='password' className='w-full outline-none border-2 px-3 p-1 rounded-md' />
+            <input required type="text" name='password' id='password' className='w-full outline-none border-2 px-3 p-1 rounded-md' onChange={handleChange} value={user.password} />
           </div>
           <Link className='text-xs italics text-blue-600 my-4 ' to='/recover'>Forgot password?</Link>
           <button type='submit' className='px-4 p-1 bg-orange-500 text-white rounded-md'>Sign In</button>
-
+          <p className='text-xs text-red-600'>{problem}</p>
         </form>
 
       </section>
