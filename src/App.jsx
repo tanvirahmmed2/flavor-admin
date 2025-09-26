@@ -14,6 +14,7 @@ import Products from './pages/Products'
 import Review from './pages/Review'
 import Error from './components/Error'
 import Forget from './user/Forget'
+import ProtectedRoute from './components/ProtectedRoute'
 
 const App = () => {
   return (
@@ -22,18 +23,18 @@ const App = () => {
       <Sidebar/>
       <div className='w-full mt-24 min-h-screen flex flex-col items-center justify-center gap-6 p-4'>
         <Routes>
-        <Route path='/' element={<Home/>}/>
-        <Route path='/orders' element={<Order/>}/>
-        <Route path='/settings' element={<Setting/>}/>
-        <Route path='/addproduct' element={<AddProduct/>}/>
-        <Route path='/updateproduct' element={<UpdateProduct/>}/>
-        <Route path='/products' element={<Products/>}/>
-        <Route path='/signin' element={<SignIn/>}/>
-        <Route path='/signup' element={<SignUp/>}/>
-        <Route path='/reviews' element={<Review/>}/>
-        <Route path='/recover' element={<Forget/>}/>
-        <Route path='/*' element={<Error/>}/>
-      </Routes>
+          <Route path='/' element={<ProtectedRoute><Home/></ProtectedRoute>} />
+          <Route path='/orders' element={<ProtectedRoute><Order/></ProtectedRoute>} />
+          <Route path='/products' element={<ProtectedRoute><Products/></ProtectedRoute>} />
+          <Route path='/reviews' element={<ProtectedRoute><Review/></ProtectedRoute>} />
+          <Route path='/settings' element={<ProtectedRoute><Setting/></ProtectedRoute>} />
+          <Route path='/addproduct' element={<ProtectedRoute><AddProduct/></ProtectedRoute>} />
+          <Route path='/updateproduct' element={<ProtectedRoute><UpdateProduct/></ProtectedRoute>} />
+          <Route path='/signin' element={<SignIn/>} />
+          <Route path='/signup' element={<SignUp/>} />
+          <Route path='/recover' element={<Forget/>} />
+          <Route path='/*' element={<Error/>} />
+        </Routes>
       </div>
       <Footer/>
     </div>
