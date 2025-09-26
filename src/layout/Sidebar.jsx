@@ -23,7 +23,8 @@ const Sidebar = () => {
           <Link to='/reviews'></Link>
         </div>
       </div>
-      <div>
+      <div className='w-full flex flex-col items-start justify-start gap-2'>
+        <button>LogOut</button>
         <Link onClick={handleSidebar} to='/settings'><FaGear className='text-xl cursor-pointer hover:rotate-45 transition duration-500' /></Link>
       </div>
     </div>
