@@ -3,11 +3,12 @@ import { Navigate } from 'react-router-dom'
 import { ShopContext } from './Context'
 
 const ProtectedRoute = ({ children }) => {
-  const { user } = useContext(ShopContext)
+  const { isAdmin } = useContext(ShopContext)
 
-  if (!user) {
-    return <Navigate to="/signin" replace />
-  }
+  // wait for context to load on refresh
+  if (isAdmin === null) return null
+
+  if (!isAdmin) return <Navigate to="/signin" replace />
 
   return children
 }
