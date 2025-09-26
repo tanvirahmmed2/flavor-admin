@@ -8,7 +8,7 @@ const SignUp = () => {
     password: '',
     phone: ''
   })
-  const [problem, setProblem] = useState([])
+  const [problem, setProblem] = useState('')
 
   const handleChange = (e) => {
     const { name, value } = e.target

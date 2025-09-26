@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 const SignIn = () => {
-  const [problem, setProblem]= useState([])
+  const [problem, setProblem]= useState('')
   const [user, setUser] = useState({
     email: '',
     password: ''
