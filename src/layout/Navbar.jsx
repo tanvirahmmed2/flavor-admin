@@ -15,7 +15,7 @@ const Navbar = () => {
             <Link to='/products' className='px-2 lg:px-3 h-full flex items-center justify-center border-orange-500 p-1 hover:border-b-2 font-semibold'>Product</Link>
         </div>
         <div className='w-auto h-full flex flex-row items-center justify-center gap-3 '>
-            <Link to='/orders' className={`bg-orange-500 text-white px-4 p-1 font-semibold rounded-lg cursor-pointer ${localStorage.getItem('admin_token')? 'block': 'hidden'}`}>Check Orders</Link>
+            <Link to='/orders' className={`bg-orange-500 text-white px-4 p-1 font-semibold rounded-lg cursor-pointer `}>Check Orders</Link>
             <p className='text-2xl text-orange-500 px-4 cursor-pointer' onClick={()=> setIsSidebar(!isSidebar)}><HiOutlineBars3CenterLeft/></p>
         </div>
     </nav>

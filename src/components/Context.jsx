@@ -7,23 +7,29 @@ export const ContextProvider = ({ children }) => {
   const [user, setUser] = useState(null)
   const [product, setProduct] = useState([])
   const [order, setOrder] = useState([])
-  const [isAdmin, setIsAdmin] = useState(null) // null means "not loaded yet"
+  const [isAdmin, setIsAdmin] = useState(false) // null means "not loaded yet"
 
   // Restore user & admin state from localStorage
   useEffect(() => {
-    const storedUser = localStorage.getItem('admin_user')
-    const storedIsAdmin = localStorage.getItem('isAdmin')
-    const token = localStorage.getItem('admin_token')
-
-    if (token && storedIsAdmin === 'true') {
-      setIsAdmin(true)
-    } else {
-      setIsAdmin(false)
-    }
-
-    if (storedUser) {
-      setUser(JSON.parse(storedUser))
-    }
+    const checkSession = async () => {
+      try {
+        const res = await fetch('http://localhost:5000/user/protected', {
+          credentials: 'include' // send cookies
+        });
+        const data = await res.json();
+        if (data.success) {
+          setUser(data.user);
+          setIsAdmin(data.user.isAdmin);
+        } else {
+          setUser(null);
+          setIsAdmin(false);
+        }
+      } catch (err) {
+        setUser(null);
+        setIsAdmin(false);
+      }
+    };
+    checkSession();
   }, [])
 
   // Fetch products from backend
