@@ -10,8 +10,25 @@ const Sidebar = () => {
     setIsSidebar(!isSidebar)
   }
 
-  const handleLogout=()=>{
+  const handleLogout=async()=>{
     localStorage.removeItem('admin_token')
+    try {
+      const res= await fetch('http://localhost:5000/user/signout',{
+        method:'POST',
+        headers:{
+          Accept: 'application/json'
+        }
+      })
+      const data= await res.json()
+      if(data.success){
+        alert(data.message || 'Suceefully logout')
+      }else{
+        alert('Logout failed')
+      }
+    } catch (error) {
+      alert(error)
+      
+    }
   }
   return (
     <div className={`w-auto px-6 h-screen fixed left-0 py-6 flex flex-col items-start justify-between shadow-sm shadow-orange-500 ${isSidebar ? 'translate-x-0' : '-translate-x-full'} transition-transform ease-in-out bg-white  duration-500`}>
