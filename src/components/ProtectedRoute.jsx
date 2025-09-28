@@ -3,12 +3,14 @@ import { Navigate } from 'react-router-dom'
 import { ShopContext } from './Context'
 
 const ProtectedRoute = ({ children }) => {
-  const { isAdmin, user } = useContext(ShopContext)
+  const { isAdmin } = useContext(ShopContext)
 
-  // wait for session check
-  if (user===null) return <div>Please sign in or sign up</div> // or a spinner
+  
+  setTimeout(() => {
+    if (!isAdmin) return <Navigate to="/signin" replace />
+  }, 2000);
 
-  if (!isAdmin) return <Navigate to="/signin" replace />
+  
 
   return children
 }
