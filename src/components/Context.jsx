@@ -7,32 +7,34 @@ export const ContextProvider = ({ children }) => {
   const [user, setUser] = useState(null)
   const [product, setProduct] = useState([])
   const [order, setOrder] = useState([])
-  const [isAdmin, setIsAdmin] = useState(false) // null means "not loaded yet"
+  const [isAdmin, setIsAdmin] = useState(false)
+  const [loading, setLoading] = useState(true) // ✅ NEW
 
-  // Restore user & admin state from localStorage
   useEffect(() => {
     const checkSession = async () => {
       try {
         const res = await fetch('http://localhost:5000/user/protected', {
           credentials: 'include' // send cookies
-        });
-        const data = await res.json();
+        })
+        const data = await res.json()
         if (data.success) {
-          setUser(data.user);
-          setIsAdmin(data.user.isAdmin);
+          setUser(data.user)
+          setIsAdmin(data.user.isAdmin)
         } else {
-          setUser(null);
-          setIsAdmin(false);
+          setUser(null)
+          setIsAdmin(false)
         }
       } catch (err) {
-        setUser(null);
-        setIsAdmin(false);
+        setUser(null)
+        setIsAdmin(false)
+      } finally {
+        setLoading(false) // ✅ stop loading once fetch finishes
       }
-    };
-    checkSession();
+    }
+    checkSession()
   }, [])
 
-  // Fetch products from backend
+  // Fetch products
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -41,7 +43,7 @@ export const ContextProvider = ({ children }) => {
           headers: { Accept: 'application/json' },
         })
         const data = await res.json()
-        setProduct(data.product || []) // safely handle undefined
+        setProduct(data.product || [])
       } catch (err) {
         console.error('Error fetching products:', err)
       }
@@ -61,6 +63,7 @@ export const ContextProvider = ({ children }) => {
     setOrder,
     isAdmin,
     setIsAdmin,
+    loading, // ✅ pass down
   }
 
   return <ShopContext.Provider value={ContextValue}>{children}</ShopContext.Provider>

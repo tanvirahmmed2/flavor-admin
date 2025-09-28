@@ -3,14 +3,15 @@ import { Navigate } from 'react-router-dom'
 import { ShopContext } from './Context'
 
 const ProtectedRoute = ({ children }) => {
-  const { isAdmin } = useContext(ShopContext)
+  const { isAdmin, loading } = useContext(ShopContext)
 
-  
-  setTimeout(() => {
-    if (!isAdmin) return <Navigate to="/signin" replace />
-  }, 2000);
+  if (loading) {
+    return <div>Loading...</div> // or spinner
+  }
 
-  
+  if (!isAdmin) {
+    return <Navigate to="/signin" replace />
+  }
 
   return children
 }
