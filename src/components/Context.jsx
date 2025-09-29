@@ -71,6 +71,25 @@ export const ContextProvider = ({ children }) => {
     fetchReserve()
   },[])
 
+
+  useEffect(()=>{
+    const fetchOrder=async()=>{
+      try {
+        const res= await fetch('http://localhost:5000/order',{
+          method:'GET',
+          credentials: 'include'
+        })
+        const data= await res.json()
+        if(data.success){
+          setOrder(data)
+        }
+      } catch (error) {
+        console.error('Error fetching products:', error)
+      }
+    }
+    fetchOrder()
+  },[])
+
   const ContextValue = {
     isSidebar,
     setIsSidebar,
