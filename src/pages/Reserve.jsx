@@ -1,34 +1,50 @@
 import React from 'react'
 import { useContext } from 'react'
 import { ShopContext } from '../components/Context'
+import { useState } from 'react'
 
 const Reserve = () => {
-    const {reserve}= useContext(ShopContext)
+    const [problem, setProblem]= useState('')
+    const { reserve } = useContext(ShopContext)
 
-  return (
-    <div className='w-full flex flex-col items-center justify-center gap-4 text-center'>
-        <h1 className='text-2xl font-semibold'>Reserve seats</h1>
-        <div className='w-full grid grid-cols-4 justify-items-center gap-2'>
-            <p>Name</p>
-            <p>Guest</p>
-            <p>Phone</p>
-            <p>Date</p>
-        </div>
-        {
-            reserve? <div className='w-full'>
-                {reserve.map((res)=>{
-                    const {name, guest, phone, date}=res
-                    return <div className='w-full grid grid-cols-4 justify-items-center gap-2'>
-                        <h1>{name}</h1>
-                        <p>{guest}</p>
-                        <p>{phone}</p>
-                        <p>{date}</p>
-                    </div>
-                })}
-            </div>:<p>No reserve found</p>
+
+    const deletReserve=async(id)=>{
+        console.log(id)
+        try {
+            
+        } catch (error) {
+            setProblem(error)
         }
-    </div>
-  )
+    }
+    return (
+        <div className='w-full flex flex-col items-center justify-center gap-4 text-center'>
+            <h1 className='text-2xl font-semibold'>Reserve seats</h1>
+            <div className='w-full grid grid-cols-5 justify-center items-start gap-2 border-2'>
+                <p>Name</p>
+                <p>Guest</p>
+                <p>Phone</p>
+                <p>Date</p>
+                <p>Delete</p>
+            </div>
+
+
+            {
+                reserve ? <div className='w-full flex flex-col items-center justify-center gap-4'>
+                    {reserve.map((res) => {
+                        const { name, guest, phone, date, _id } = res
+                        return <div className='w-full grid grid-cols-5 justify-center items-start gap-2' key={_id}>
+                            <h1>{name}</h1>
+                            <p>{guest}</p>
+                            <p>{phone}</p>
+                            <p>{date}</p>
+                            <button onClick={()=> deletReserve(_id)}>Delete</button>
+                        </div>
+                    })}
+                </div> : <p>No reserve found</p>
+            }
+            <p></p>
+        </div>
+    )
 }
 
 export default Reserve

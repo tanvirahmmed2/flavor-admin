@@ -1,94 +1,95 @@
-import React, { createContext, useEffect, useState } from 'react'
+import React, { createContext, useEffect, useState } from 'react';
 
-export const ShopContext = createContext()
+export const ShopContext = createContext();
 
 export const ContextProvider = ({ children }) => {
-  const [isSidebar, setIsSidebar] = useState(false)
-  const [user, setUser] = useState(null)
-  const [product, setProduct] = useState([])
-  const [order, setOrder] = useState([])
-  const [reserve, setReserve] = useState([])
-  const [isAdmin, setIsAdmin] = useState(false)
-  const [loading, setLoading] = useState(true) // ✅ NEW
+  const [isSidebar, setIsSidebar] = useState(false);
+  const [user, setUser] = useState(null);
+  const [product, setProduct] = useState([]);
+  const [order, setOrder] = useState([]);
+  const [reserve, setReserve] = useState([]);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const checkSession = async () => {
       try {
         const res = await fetch('http://localhost:5000/user/protected', {
-          credentials: 'include' // send cookies
-        })
-        const data = await res.json()
+          credentials: 'include',
+        });
+        const data = await res.json();
         if (data.success) {
-          setUser(data.user)
-          setIsAdmin(data.user.isAdmin)
+          setUser(data.user);
+          setIsAdmin(data.user.isAdmin);
         } else {
-          setUser(null)
-          setIsAdmin(false)
+          setUser(null);
+          setIsAdmin(false);
         }
       } catch (err) {
-        setUser(null)
-        setIsAdmin(false)
+        setUser(null);
+        setIsAdmin(false);
       } finally {
-        setLoading(false) // ✅ stop loading once fetch finishes
+        setLoading(false);
       }
-    }
-    checkSession()
-  }, [])
+    };
+    checkSession();
+  }, []);
 
   // Fetch products
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         const res = await fetch('http://localhost:5000/product', {
-          method: "GET",
+          method: 'GET',
           headers: { Accept: 'application/json' },
-        })
-        const data = await res.json()
-        setProduct(data.product || [])
+        });
+        const data = await res.json();
+        setProduct(data.product || []);
       } catch (err) {
-        console.error('Error fetching products:', err)
+        console.error('Error fetching products:', err);
       }
-    }
+    };
+    fetchProducts();
+  }, []);
 
-    fetchProducts()
-  }, [])
-
-  useEffect(()=>{
-    const fetchReserve=async()=>{
+  // Fetch reserve
+  useEffect(() => {
+    const fetchReserve = async () => {
       try {
-        const res= await fetch('http://localhost:5000/reserve',{
-          method:'GET',
-          credentials: 'include'
-        })
-        const data= await res.json()
-        if(data.success){
-          setReserve(data)
+        const res = await fetch('http://localhost:5000/reserve', {
+          method: 'GET',
+          credentials: 'include',
+        });
+        const data = await res.json();
+        if (data.success) {
+          setReserve(data.payload || []);
         }
       } catch (error) {
-        console.error('Error fetching products:', error)
+        console.error('Error fetching reserve:', error);
       }
-    }
-    fetchReserve()
-  },[])
+    };
+    fetchReserve();
+  }, []);
 
-
-  useEffect(()=>{
-    const fetchOrder=async()=>{
-      try {
-        const res= await fetch('http://localhost:5000/order',{
-          method:'GET',
-          credentials: 'include'
-        })
-        const data= await res.json()
-        if(data.success){
-          setOrder(data)
-        }
-      } catch (error) {
-        console.error('Error fetching products:', error)
-      }
-    }
-    fetchOrder()
-  },[])
+  
+  // Fetch order
+  // useEffect(() => {
+  //   const fetchOrder = async () => {
+  //     try {
+  //       const res = await fetch('http://localhost:5000/order/getorders', {
+  //         method: 'GET',
+  //         credentials: 'include',
+  //       });
+  //       const data = await res.json();
+  //       if (data.success) {
+  //         setOrder(data.order || []);
+  //       }
+  //     } catch (error) {
+  //       console.error('Error fetching order:', error);
+  //     }
+  //   };
+  //   fetchOrder();
+  // }, []);
 
   const ContextValue = {
     isSidebar,
@@ -101,9 +102,10 @@ export const ContextProvider = ({ children }) => {
     setOrder,
     isAdmin,
     setIsAdmin,
-    loading, // ✅ pass down
-    reserve, setReserve
-  }
+    loading,
+    reserve,
+    setReserve,
+  };
 
-  return <ShopContext.Provider value={ContextValue}>{children}</ShopContext.Provider>
-}
+  return <ShopContext.Provider value={ContextValue}>{children}</ShopContext.Provider>;
+};
