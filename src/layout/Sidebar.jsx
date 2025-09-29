@@ -55,6 +55,7 @@ const Sidebar = () => {
               <Link to='/updateproduct' onClick={handleSidebar}>Update Product</Link>
               <Link to='/orders' onClick={handleSidebar}>Orders</Link>
               <Link to='/reviews' onClick={handleSidebar}>Reviews</Link>
+              <Link to='/reserve' onClick={handleSidebar}>Reserve</Link>
             </>
           ) : (
             <>

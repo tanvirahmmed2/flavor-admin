@@ -7,6 +7,7 @@ export const ContextProvider = ({ children }) => {
   const [user, setUser] = useState(null)
   const [product, setProduct] = useState([])
   const [order, setOrder] = useState([])
+  const [reserve, setReserve] = useState([])
   const [isAdmin, setIsAdmin] = useState(false)
   const [loading, setLoading] = useState(true) // ✅ NEW
 
@@ -52,6 +53,24 @@ export const ContextProvider = ({ children }) => {
     fetchProducts()
   }, [])
 
+  useEffect(()=>{
+    const fetchReserve=async()=>{
+      try {
+        const res= await fetch('http://localhost:5000/reserve',{
+          method:'GET',
+          credentials: 'include'
+        })
+        const data= await res.json()
+        if(data.success){
+          setReserve(data)
+        }
+      } catch (error) {
+        console.error('Error fetching products:', error)
+      }
+    }
+    fetchReserve()
+  },[])
+
   const ContextValue = {
     isSidebar,
     setIsSidebar,
@@ -64,6 +83,7 @@ export const ContextProvider = ({ children }) => {
     isAdmin,
     setIsAdmin,
     loading, // ✅ pass down
+    reserve, setReserve
   }
 
   return <ShopContext.Provider value={ContextValue}>{children}</ShopContext.Provider>

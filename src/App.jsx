@@ -15,6 +15,7 @@ import Review from './pages/Review'
 import Error from './components/Error'
 import Forget from './user/Forget'
 import ProtectedRoute from './components/ProtectedRoute'
+import Reserve from './pages/Reserve'
 
 const App = () => {
   return (
@@ -30,6 +31,7 @@ const App = () => {
           <Route path='/settings' element={<ProtectedRoute><Setting/></ProtectedRoute>} />
           <Route path='/addproduct' element={<ProtectedRoute><AddProduct/></ProtectedRoute>} />
           <Route path='/updateproduct' element={<ProtectedRoute><UpdateProduct/></ProtectedRoute>} />
+          <Route path='/reserve' element={<ProtectedRoute><Reserve/></ProtectedRoute>} />
           <Route path='/signin' element={<SignIn/>} />
           <Route path='/signup' element={<SignUp/>} />
           <Route path='/recover' element={<Forget/>} />
