@@ -11,7 +11,16 @@ const Reserve = () => {
     const deletReserve=async(id)=>{
         console.log(id)
         try {
-            
+            const res= await fetch('http://localhost:5000/reserve/delete',{
+                method:"POST",
+                credentials: 'include',
+                headers:{
+                    Accept: 'application/json'
+                },
+                body: JSON.stringify({id})
+
+            })
+            const data= await res.json()
         } catch (error) {
             setProblem(error)
         }
