@@ -1,34 +1,39 @@
-import React from 'react'
-import { useContext } from 'react'
+import React, { useContext } from 'react'
 import { ShopContext } from '../components/Context'
 
 const Order = () => {
   const { order } = useContext(ShopContext)
+
   return (
     <section className='w-full h-auto flex flex-col gap-6 items-center justify-center'>
       <h1 className='text-2xl font-semibold text-center'>Check your latest orders and serve</h1>
-      <div className='w-full grid grid-cols-5 justify-items-center border-2'>
+
+      <div className='w-full grid grid-cols-5 justify-items-center border-2 font-semibold p-2'>
         <p>Name</p>
         <p>Order</p>
-        <p>Quantity</p>
+        <p>PayMethod</p>
         <p>Bill</p>
         <p>Delivery</p>
       </div>
-      {
-        order ? <div className='w-full'>
-          {order.map((res) => {
-            const { name, order, quantity, bill } = res
-            return <div className='w-full grid grid-cols-5 justify-items-center gap-2'>
-              <h1>{name}</h1>
-              <p>{order}</p>
-              <p>{quantity}</p>
-              <p>{bill}</p>
-              <p>Delivery</p>
-            </div>
-          })}
-        </div> : <p>No order found</p>
-      }
 
+      {order && order.length > 0 ? (
+        <div className='w-full'>
+          {order.map((res) => {
+            const { name, _id, totalAmount, paymethod, details } = res
+            return (
+              <div key={_id} className='w-full grid grid-cols-5 justify-items-center gap-2 p-2 border-b'>
+                <h1>{name}</h1>
+                <p>{Array.isArray(details) ? details.map(item => item.name).join(', ') : details}</p>
+                <p>{paymethod}</p>
+                <p>{totalAmount}</p>
+                <p>Delivery</p>
+              </div>
+            )
+          })}
+        </div>
+      ) : (
+        <p className='text-gray-500 italic'>No order found</p>
+      )}
     </section>
   )
 }

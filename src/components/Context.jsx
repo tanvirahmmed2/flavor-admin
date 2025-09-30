@@ -73,23 +73,29 @@ export const ContextProvider = ({ children }) => {
 
   
   // Fetch order
-  // useEffect(() => {
-  //   const fetchOrder = async () => {
-  //     try {
-  //       const res = await fetch('http://localhost:5000/order/getorders', {
-  //         method: 'GET',
-  //         credentials: 'include',
-  //       });
-  //       const data = await res.json();
-  //       if (data.success) {
-  //         setOrder(data.order || []);
-  //       }
-  //     } catch (error) {
-  //       console.error('Error fetching order:', error);
-  //     }
-  //   };
-  //   fetchOrder();
-  // }, []);
+useEffect(() => {
+  const fetchOrder = async () => {
+    try {
+      const res = await fetch('http://localhost:5000/order/getorders', {
+        method: 'GET',
+        credentials: 'include',
+      });
+      const data = await res.json();
+      if (data.success) {
+        setOrder(data.payload || []);
+      } else {
+        console.error('Failed to fetch orders:', data.message);
+      }
+    } catch (error) {
+      console.error('Error fetching order:', error);
+    }
+  };
+
+  fetchOrder();
+}, []); // fetch only once
+
+console.log(order)
+
 
   const ContextValue = {
     isSidebar,
