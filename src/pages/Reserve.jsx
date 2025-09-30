@@ -21,6 +21,11 @@ const Reserve = () => {
 
             })
             const data= await res.json()
+            if(data.success){
+                setProblem(data.message)
+            }else{
+                setProblem(data.message)
+            }
         } catch (error) {
             setProblem(error)
         }
@@ -51,7 +56,7 @@ const Reserve = () => {
                     })}
                 </div> : <p>No reserve found</p>
             }
-            <p></p>
+            <p>{problem}</p>
         </div>
     )
 }
