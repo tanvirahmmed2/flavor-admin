@@ -51,11 +51,12 @@ const Products = () => {
       )}
 
       {/* Table Header */}
-      <div className="w-full grid grid-cols-5 justify-items-center border-2 bg-gray-200">
+      <div className="w-full grid grid-cols-6 justify-items-center border-2 bg-gray-200">
         <p>Name</p>
         <p>Description</p>
         <p>Price</p>
         <p>Offer Price</p>
+        <p>Category</p>
         <p>Remove</p>
       </div>
 
@@ -64,16 +65,17 @@ const Products = () => {
         <p className="text-center mt-4">No products available</p>
       ) : (
         product.map((item, index) => {
-          const { _id, name, old_price, new_price, description } = item;
+          const { _id, name, old_price, new_price, description, category } = item;
           return (
             <div
               key={_id || index}
-              className="w-full grid grid-cols-5 justify-items-center border-2"
+              className="w-full grid grid-cols-6 justify-items-center border-2"
             >
               <p>{name}</p>
               <p>{description}</p>
               <p>{old_price}</p>
               <p>{new_price}</p>
+              <p>{category}</p>
               <p>
                 <button
                   className="text-red-500 hover:underline"
