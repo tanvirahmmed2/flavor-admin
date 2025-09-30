@@ -8,28 +8,24 @@ const Reserve = () => {
     const { reserve } = useContext(ShopContext)
 
 
-    const deletReserve=async(id)=>{
-        console.log(id)
-        try {
-            const res= await fetch('http://localhost:5000/reserve/delete',{
-                method:"POST",
-                credentials: 'include',
-                headers:{
-                    Accept: 'application/json'
-                },
-                body: JSON.stringify({id})
+    const deleteReserve = async (id) => {
+    try {
+        const res = await fetch('http://localhost:5000/reserve/delete', {
+            method: "POST", // or "DELETE" if your server supports it
+            credentials: 'include',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ id })
+        });
 
-            })
-            const data= await res.json()
-            if(data.success){
-                setProblem(data.message)
-            }else{
-                setProblem(data.message)
-            }
-        } catch (error) {
-            setProblem(error)
-        }
+        const data = await res.json();
+        setProblem(data.message); // you can handle success or failure with the message
+    } catch (error) {
+        setProblem(error.message);
     }
+}
     return (
         <div className='w-full flex flex-col items-center justify-center gap-4 text-center'>
             <h1 className='text-2xl font-semibold'>Reserve seats</h1>
@@ -51,7 +47,7 @@ const Reserve = () => {
                             <p>{guest}</p>
                             <p>{phone}</p>
                             <p>{date}</p>
-                            <button onClick={()=> deletReserve(_id)}>Delete</button>
+                            <button onClick={()=> deleteReserve(_id)}>Delete</button>
                         </div>
                     })}
                 </div> : <p>No reserve found</p>
