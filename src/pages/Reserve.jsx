@@ -10,7 +10,7 @@ const Reserve = () => {
 
     const deleteReserve = async (id) => {
     try {
-        const res = await fetch('http://localhost:5000/reserve/delete', {
+        const res = await fetch('https://flavor-server.onrender.com/reserve/delete', {
             method: "POST", // or "DELETE" if your server supports it
             credentials: 'include',
             headers: {

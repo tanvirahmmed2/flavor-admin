@@ -22,7 +22,7 @@ const SignUp = () => {
     e.preventDefault()
     console.log(newUser)
     try {
-      const res = await fetch('http://localhost:5000/user/signup', {
+      const res = await fetch('https://flavor-server.onrender.com/user/signup', {
         method: 'POST',
         headers: {
           Accept: 'application/json',

@@ -14,7 +14,7 @@ export const ContextProvider = ({ children }) => {
   useEffect(() => {
     const checkSession = async () => {
       try {
-        const res = await fetch('http://localhost:5000/user/protected', {
+        const res = await fetch('https://flavor-server.onrender.com/user/protected', {
           credentials: 'include',
         });
         const data = await res.json();
@@ -39,7 +39,7 @@ export const ContextProvider = ({ children }) => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await fetch('http://localhost:5000/product', {
+        const res = await fetch('https://flavor-server.onrender.com/product', {
           method: 'GET',
           headers: { Accept: 'application/json' },
         });
@@ -56,7 +56,7 @@ export const ContextProvider = ({ children }) => {
   useEffect(() => {
     const fetchReserve = async () => {
       try {
-        const res = await fetch('http://localhost:5000/reserve', {
+        const res = await fetch('https://flavor-server.onrender.com/reserve', {
           method: 'GET',
           credentials: 'include',
         });
@@ -76,7 +76,7 @@ export const ContextProvider = ({ children }) => {
 useEffect(() => {
   const fetchOrder = async () => {
     try {
-      const res = await fetch('http://localhost:5000/order/getorders', {
+      const res = await fetch('https://flavor-server.onrender.com/order/getorders', {
         method: 'GET',
         credentials: 'include',
       });

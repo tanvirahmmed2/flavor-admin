@@ -7,7 +7,7 @@ const Products = () => {
 
   const handleRemove = async (id) => {
     try {
-      const res = await fetch('http://localhost:5000/product/removeproduct', {
+      const res = await fetch('https://flavor-server.onrender.com/product/removeproduct', {
         method: 'POST',
         credentials: 'include',
         body: JSON.stringify({ id }),

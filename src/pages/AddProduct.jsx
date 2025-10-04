@@ -36,7 +36,7 @@ const AddProduct = () => {
         console.log(pair[0], pair[1])
       }
 
-      const res = await fetch('http://localhost:5000/product/addproduct', {
+      const res = await fetch('https://flavor-server.onrender.com/product/addproduct', {
         method: 'POST',
         credentials: 'include',
         body: formData

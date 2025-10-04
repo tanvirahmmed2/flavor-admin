@@ -18,7 +18,7 @@ const SignIn = () => {
     setProblem('')
 
     try {
-      const res = await fetch('http://localhost:5000/user/signin', {
+      const res = await fetch('https://flavor-server.onrender.com/user/signin', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include', // ✅ important for cookies
